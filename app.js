@@ -9,16 +9,16 @@ if (!address) {
     console.log(chalk.red.inverse("Please provide an address!!!"))
 } else {
     //calling of the function
-    location(address, (error, data) => {
+    location(address, (error, { latitude, longitude, placeName }) => {
         // console.log(d + " | " + d.latitude + " | " + d.longitude)
         if (error) {
             console.log(chalk.red.inverse(error))
         } else {
-            weather(data, (err, val) => {
+            weather({ latitude, longitude }, (err, { temperature, probablity }) => {
                 if (err) {
                     console.log(chalk.red.inverse(error))
                 } else {
-                    console.log(chalk.green.inverse("Temperature: " + val.temperature + " Rain Probablity: " + val.probablity + "% for " + data.placeName))
+                    console.log(chalk.green.inverse("Temperature: " + temperature + " Rain Probablity: " + probablity + "% for " + placeName))
                 }
             })
         }
